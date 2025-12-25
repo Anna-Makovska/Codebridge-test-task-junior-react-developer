@@ -1,63 +1,53 @@
-import { SearchBar } from '../SearchBar/SearchBar'
-import { ArticleList } from '../ArticleList/ArticleList'
-import { useQuery } from '@tanstack/react-query';
-import { fetchArticles } from '../../services/fetchArticles';
-import { Typography, Divider, CircularProgress, Alert, Container } from '@mui/material';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
-import s from './App.module.css';
-
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: "#FFFFFF",
-    },
-  },
-});
+import { Routes, Route } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
+import { HomePage } from '../../pages/HomePage/HomePage';
+import { ArticlePage } from '../../pages/ArticlePage/ArticlePage';
+import { NotFound } from '../../pages/NotFound/NotFound';
 
 function App() {
-  const { data, isLoading, isError } = useQuery({
-    queryKey: ['articles'],
-    queryFn: fetchArticles,
-  });
-
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <div className={s.app}>
-        <header className={s.header}>
-          <SearchBar />
-        </header>
-        <Container maxWidth="xl" className={s.main}>
-          <div className={s.resultsHeader}>
-            <Typography variant="h6" className={s.resultsText}>
-              Results: {data?.length || 0}
-            </Typography>
-            <Divider className={s.divider} />
-          </div>
-          
-          {isLoading && (
-            <div className={s.loadingContainer}>
-              <CircularProgress />
-            </div>
-          )}
-          
-          {isError && (
-            <Alert severity="error" className={s.errorAlert}>
-              Помилка завантаження статей
-            </Alert>
-          )}
-          
-          {data && data.length > 0 && <ArticleList articles={data} />}
-          
-          {data && data.length === 0 && (
-            <Typography variant="body1" className={s.emptyState}>
-              Статті не знайдено
-            </Typography>
-          )}
-        </Container>
-      </div>
-    </ThemeProvider>
+    <>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/article/:id" element={<ArticlePage />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+      <Toaster 
+        position="top-right"
+        toastOptions={{
+          duration: 3000,
+          style: {
+            background: '#ffffff',
+            color: '#363636',
+            borderRadius: '8px',
+            padding: '16px',
+            fontSize: '16px',
+            border: '1px solid #e0e0e0',
+            boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)',
+          },
+          success: {
+            iconTheme: {
+              primary: '#4caf50',
+              secondary: '#fff',
+            },
+            style: {
+              background: '#f5f5f5',
+              color: '#363636',
+            },
+          },
+          error: {
+            iconTheme: {
+              primary: '#f44336',
+              secondary: '#fff',
+            },
+            style: {
+              background: '#f5f5f5',
+              color: '#363636',
+            },
+          },
+        }}
+      />
+    </>
   );
 }
 

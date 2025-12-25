@@ -75,9 +75,11 @@
   font-weight: 600;
   cursor: pointer;
   margin-top: auto;
-  transition: color 0.3s ease;
+  text-decoration: none;
 }
 
-.readMoreLink:hover {
-  color: #1976d2;
+.highlight {
+  background-color: #FFD700;
+  padding: 2px 0;
+  border-radius: 2px;
 }

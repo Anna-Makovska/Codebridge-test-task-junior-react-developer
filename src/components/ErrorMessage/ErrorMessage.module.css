@@ -1,0 +1,41 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 60px 20px;
+}
+
+.alert {
+  max-width: 600px;
+  width: 100%;
+  border-radius: 8px;
+}
+
+.icon {
+  font-size: 24px;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.message {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.retryButton {
+  align-self: flex-start;
+  margin-top: 8px;
+}
+

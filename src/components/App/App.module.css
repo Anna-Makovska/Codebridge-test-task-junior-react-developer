@@ -12,10 +12,21 @@
 .main {
   flex-grow: 1;
   padding: 40px 20px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+}
+
+.resultsHeaderContainer {
+  margin-bottom: 40px;
+  padding: 0 40px;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .resultsHeader {
-  margin-bottom: 40px;
+  width: 100%;
 }
 
 .resultsText {
@@ -41,4 +52,13 @@
 .emptyState {
   text-align: center;
   padding: 40px;
+}
+
+.paginationContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+  padding: 20px 0;
+  width: 100%;
+  box-sizing: border-box;
 }

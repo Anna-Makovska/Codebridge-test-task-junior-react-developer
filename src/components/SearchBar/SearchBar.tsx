@@ -1,7 +1,20 @@
+import { useState, useEffect } from 'react';
 import { TextField } from '@mui/material';
+import { useDebounce } from 'use-debounce';
 import s from './SearchBar.module.css';
 
-export const SearchBar = () => {
+interface SearchBarProps {
+  onSearchChange: (searchTerm: string) => void;
+}
+
+export const SearchBar = ({ onSearchChange }: SearchBarProps) => {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [debouncedSearchTerm] = useDebounce(searchTerm, 500);
+
+  useEffect(() => {
+    onSearchChange(debouncedSearchTerm);
+  }, [debouncedSearchTerm]);
+
   return (
     <div className={s.searchContainer}>
       <TextField
@@ -9,6 +22,8 @@ export const SearchBar = () => {
         variant="outlined"
         fullWidth
         className={s.searchField}
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
       />
     </div>
   );
