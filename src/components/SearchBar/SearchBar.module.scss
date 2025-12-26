@@ -1,0 +1,53 @@
+$font-family: 'Montserrat', sans-serif;
+$color-text: #575757;
+$color-white: #FFFFFF;
+$color-border: #EAEAEA;
+$input-height: 50px;
+$input-width: 600px;
+
+.searchContainer {
+  width: $input-width;
+}
+
+.searchField {
+  width: 100%;
+
+  :global(.MuiOutlinedInput-root) {
+    height: $input-height;
+    border-radius: 5px;
+    background-color: $color-white;
+    font-family: $font-family;
+    font-size: 16px;
+    color: $color-text;
+    box-shadow: 0px 8px 24px 0px rgba(0, 0, 0, 0.05);
+    padding: 0;
+
+    fieldset {
+      border-color: $color-border;
+      border-width: 1px;
+    }
+
+    &:hover fieldset {
+      border-color: $color-border;
+    }
+
+    &.Mui-focused fieldset {
+      border-color: $color-border;
+      border-width: 1px;
+    }
+  }
+
+  :global(.MuiOutlinedInput-input) {
+    padding: 0 16px;
+    font-family: $font-family;
+    font-size: 16px;
+    color: $color-text;
+    height: $input-height;
+    box-sizing: border-box;
+
+    &::placeholder {
+      color: $color-text;
+      opacity: 0.5;
+    }
+  }
+}

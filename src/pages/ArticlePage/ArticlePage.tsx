@@ -1,37 +1,36 @@
-import { useParams, useNavigate } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
-import { fetchArticle } from '../../services/fetchArticle';
-import { LoadingSpinner } from '../../components/LoadingSpinner/LoadingSpinner';
-import { ErrorMessage } from '../../components/ErrorMessage/ErrorMessage';
-import { Container, Typography, Button, Box } from '@mui/material';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
-import { FiArrowLeft } from 'react-icons/fi';
-import toast from 'react-hot-toast';
-import { useEffect } from 'react';
-import s from './ArticlePage.module.css';
+import { useParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { fetchArticle } from "../../services/fetchArticle";
+import { LoadingSpinner } from "../../components/LoadingSpinner/LoadingSpinner";
+import { ErrorMessage } from "../../components/ErrorMessage/ErrorMessage";
+import { Button } from "../../components/Button/Button";
+import { Container, Typography, Box } from "@mui/material";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
+import toast from "react-hot-toast";
+import { useEffect } from "react";
+import ArrowLeftIcon from "../../icons/Arrow - Left.svg";
+import s from "./ArticlePage.module.scss";
 
 const theme = createTheme({
-  palette: {
-    primary: {
-      main: "#FFFFFF",
-    },
+  typography: {
+    fontFamily:
+      "'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif",
   },
 });
 
 export function ArticlePage() {
   const { id } = useParams<{ id: string }>();
-  const navigate = useNavigate();
 
-  const { data, isLoading, isError, error, refetch } = useQuery({
-    queryKey: ['article', id],
+  const { data, isLoading, isError, refetch } = useQuery({
+    queryKey: ["article", id],
     queryFn: () => fetchArticle(id!),
     enabled: !!id,
   });
 
   useEffect(() => {
     if (isError) {
-      toast.error('Не вдалося завантажити статтю');
+      toast.error("Не вдалося завантажити статтю");
     }
   }, [isError]);
 
@@ -52,23 +51,16 @@ export function ArticlePage() {
         <CssBaseline />
         <div className={s.container}>
           <Container maxWidth="lg">
-            <div className={s.articleContent}>
-              <ErrorMessage 
-                title="Помилка завантаження статті"
-                message={error instanceof Error ? error.message : 'Не вдалося завантажити статтю'}
-                onRetry={() => refetch()}
-              />
-              <Box className={s.backButtonContainer}>
-                <Button
-                  variant="contained"
-                  startIcon={<FiArrowLeft />}
-                  onClick={() => navigate('/')}
-                  className={s.backButton}
-                >
-                  Back to Home Page
-                </Button>
-              </Box>
-            </div>
+            <Box className={s.backButtonContainer}>
+              <Button to="/" icon={ArrowLeftIcon} iconPosition="left">
+                Back to homepage
+              </Button>
+            </Box>
+
+            <ErrorMessage
+              message="Не вдалося завантажити статтю"
+              onRetry={() => refetch()}
+            />
           </Container>
         </div>
       </ThemeProvider>
@@ -80,34 +72,46 @@ export function ArticlePage() {
       <CssBaseline />
       <div className={s.container}>
         <div className={s.heroSection}>
-          <div 
+          <div
             className={s.heroImage}
             style={{ backgroundImage: `url(${data.image_url})` }}
-          >
-            <div className={s.heroOverlay}>
-              <Container maxWidth="lg">
-                <Typography variant="h3" component="h1" className={s.heroTitle}>
-                  {data.title}
-                </Typography>
-              </Container>
-            </div>
+          />
+
+          <div className={s.contentBox}>
+            <Typography
+              component="h1"
+              sx={{
+                fontFamily: "Montserrat, sans-serif",
+                fontSize: "24px",
+                fontWeight: 400,
+                color: "#363636",
+                textAlign: "center",
+                mb: "50px",
+              }}
+            >
+              {data.title}
+            </Typography>
+
+            <Typography
+              component="p"
+              sx={{
+                fontFamily: "Montserrat, sans-serif",
+                fontSize: "18px",
+                fontWeight: 400,
+                lineHeight: "150%",
+                color: "#000",
+              }}
+            >
+              {data.summary}
+            </Typography>
           </div>
         </div>
-        
+
         <Container maxWidth="lg">
           <div className={s.articleContent}>
-            <Typography variant="body1" className={s.articleText}>
-              {data.summary.replace(/\[\.\.\.\]/g, '').trim()}
-            </Typography>
-            
             <Box className={s.backButtonContainer}>
-              <Button
-                variant="contained"
-                startIcon={<FiArrowLeft />}
-                onClick={() => navigate('/')}
-                className={s.backButton}
-              >
-                Back to Home Page
+              <Button to="/" icon={ArrowLeftIcon} iconPosition="left">
+                Back to homepage
               </Button>
             </Box>
           </div>
@@ -116,4 +120,3 @@ export function ArticlePage() {
     </ThemeProvider>
   );
 }
-

@@ -1,6 +1,5 @@
 import { Alert, AlertTitle, Box, Button } from '@mui/material';
-import { FiAlertCircle, FiRefreshCw } from 'react-icons/fi';
-import s from './ErrorMessage.module.css';
+import s from './ErrorMessage.module.scss';
 
 interface ErrorMessageProps {
   title?: string;
@@ -15,9 +14,8 @@ export const ErrorMessage = ({
 }: ErrorMessageProps) => {
   return (
     <div className={s.container}>
-      <Alert 
-        severity="error" 
-        icon={<FiAlertCircle className={s.icon} />}
+      <Alert
+        severity="error"
         className={s.alert}
       >
         <AlertTitle className={s.title}>{title}</AlertTitle>
@@ -26,7 +24,6 @@ export const ErrorMessage = ({
           {onRetry && (
             <Button
               variant="contained"
-              startIcon={<FiRefreshCw />}
               onClick={onRetry}
               className={s.retryButton}
             >

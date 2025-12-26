@@ -1,5 +1,5 @@
 import { CircularProgress, Box, Typography } from '@mui/material';
-import s from './LoadingSpinner.module.css';
+import s from './LoadingSpinner.module.scss';
 
 interface LoadingSpinnerProps {
   message?: string;

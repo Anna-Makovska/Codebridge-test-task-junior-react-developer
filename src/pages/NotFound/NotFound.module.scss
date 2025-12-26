@@ -1,0 +1,56 @@
+$font-family: 'Montserrat', sans-serif;
+$color-text: #363636;
+$color-white: #FFFFFF;
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: $color-white;
+  padding: 40px 20px 0;
+}
+
+.iconContainer {
+  display: flex;
+  justify-content: flex-start;
+  padding: 0 75px;
+  margin-bottom: 40px;
+}
+
+.content {
+  text-align: center;
+  max-width: 600px;
+  min-height: 60vh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.errorCode {
+  font-family: $font-family;
+  font-size: 120px;
+  font-weight: 700;
+  color: $color-text;
+  margin: 0 0 32px 0;
+  line-height: 1;
+}
+
+.title {
+  font-family: $font-family;
+  font-size: 32px;
+  font-weight: 600;
+  color: $color-text;
+  margin: 0 0 16px 0;
+}
+
+.message {
+  font-family: $font-family;
+  font-size: 18px;
+  font-weight: 400;
+  color: $color-text;
+  margin: 0;
+  line-height: 1.6;
+  opacity: 0.8;
+}

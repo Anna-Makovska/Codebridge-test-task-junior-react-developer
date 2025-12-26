@@ -1,0 +1,69 @@
+$font-family: 'Montserrat', sans-serif;
+$color-text: #363636;
+$color-text-dark: #000;
+$color-white: #ffffff;
+$color-border: #eaeaea;
+$max-width: 1440px;
+
+.container {
+  min-height: 100vh;
+  background-color: $color-white;
+  width: 100%;
+}
+
+.heroSection {
+  width: 100%;
+  position: relative;
+  margin-bottom: 80px;
+}
+
+.heroImage {
+  width: 100%;
+  height: 245px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.contentBox {
+  width: calc(100% - 40px);
+  max-width: 1290px;
+  margin: -95px auto 0;
+  background-color: $color-white;
+  border: 1px solid $color-border;
+  border-radius: 5px;
+  box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.05);
+  padding: 35px 75px 50px;
+  box-sizing: border-box;
+}
+
+.heroTitle {
+  font-family: $font-family;
+  font-size: 24px;
+  font-weight: 400;
+  color: $color-text;
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.articleText {
+  font-family: $font-family;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 150%;
+  color: $color-text-dark;
+}
+
+.articleContent {
+  max-width: $max-width;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.backButtonContainer {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0 0 0 35px;
+}

@@ -1,7 +1,8 @@
 import type { Article } from "../../types/article";
 import { Card, CardContent, CardMedia, Typography } from '@mui/material';
-import { Link } from 'react-router-dom';
-import s from './ArticleList.module.css';
+import { Button } from '../Button/Button';
+import ArrowIcon from '../../icons/Arrow - Right.svg';
+import s from './ArticleList.module.scss';
 
 interface ArticleListProps {
   articles: Article[];
@@ -49,28 +50,32 @@ export const ArticleList = ({ articles, searchTerm = '' }: ArticleListProps) => 
           <CardContent className={s.cardContent}>
             <div className={s.dateContainer}>
               <Typography variant="body2" sx={{ fontSize: '14px' }}>
-                {article.published_at}
+                {new Date(article.published_at).toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                })}
               </Typography>
             </div>
             
             <div className={s.titleContainer}>
-              <Typography variant="h5" component="h2" sx={{ fontSize: '24px', fontWeight: 600, lineHeight: '1.3' }}>
+              <Typography variant="h5" component="h2" sx={{ fontSize: '24px', fontWeight: 400, lineHeight: '29px' }}>
                 {highlightText(article.title, searchTerm)}
               </Typography>
             </div>
             
             <Typography variant="body1" className={s.summaryText}>
               {highlightText(
-                article.summary.length > 100 
-                  ? `${article.summary.substring(0, 100)}...` 
-                  : article.summary, 
+                article.summary.length > 100
+                  ? `${article.summary.substring(0, 100)}...`
+                  : article.summary,
                 searchTerm
               )}
             </Typography>
             
-            <Link to={`/article/${article.id}`} className={s.readMoreLink}>
+            <Button to={`/article/${article.id}`} icon={ArrowIcon} iconPosition="right">
               Read more
-            </Link>
+            </Button>
           </CardContent>
         </Card>
       ))}

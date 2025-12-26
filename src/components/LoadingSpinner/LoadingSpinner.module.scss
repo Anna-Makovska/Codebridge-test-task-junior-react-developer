@@ -1,3 +1,6 @@
+$color-primary: #1976d2;
+$color-text: #666;
+
 .container {
   display: flex;
   justify-content: center;
@@ -15,12 +18,11 @@
 }
 
 .spinner {
-  color: #1976d2;
+  color: $color-primary;
 }
 
 .message {
-  color: #666;
+  color: $color-text;
   font-size: 16px;
   font-weight: 500;
 }
-
